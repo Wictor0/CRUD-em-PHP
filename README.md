@@ -1,2 +1,2 @@
 # CRUD_php
-CRUD de web
+CRUD de uma pousada fictícia, feito usando PHP
