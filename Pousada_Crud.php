@@ -19,13 +19,13 @@
 
       if (escolha === "hospedes") {
         document.getElementById("formHospedes").style.display = "block";
-        imageSection.style.backgroundImage = "url('pousada2.png')";
+        imageSection.style.backgroundImage = "url('img/pousada2.png')";
       } else if (escolha === "quartos") {
         document.getElementById("formQuartos").style.display = "block";
-        imageSection.style.backgroundImage = "url('pousada3.png')";
+        imageSection.style.backgroundImage = "url('img/pousada3.png')";
       } else if (escolha === "reserva") {
         document.getElementById("formReserva").style.display = "block";
-        imageSection.style.backgroundImage = "url('pousada4.png')";
+        imageSection.style.backgroundImage = "url('img/pousada4.png')";
       }
     }
   </script>
@@ -35,7 +35,7 @@
 
 <div class="container">
     <!-- Seção de Imagem -->
-    <div class="image-section" style="background-image: url('pousada5.png');">
+    <div class="image-section" style="background-image: url('img/pousada5.png');">
       <!-- A imagem da pousada será carregada aqui -->
     </div>
 
