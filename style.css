@@ -28,7 +28,6 @@ body {
 
 .image-section {
   flex: 1;
-  background-image: url("pousada1.png"); /* URL da imagem */
   background-size: cover;
   background-position: center;
   border-right: 1px solid #ccc;
