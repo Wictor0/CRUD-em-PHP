@@ -30,7 +30,7 @@
     <h2>Funcionalidades Futuras 🚀</h2>
     <ul>
       <li>Integrar com um banco de dados (como MySQL) para armazenar e gerenciar os cadastros e reservas.</li>
-      <li>Incluir cancelamento e alteração de reserva.</li>
+      <li>Ajustes no CSS</li>
     </ul>
     <h2>Como Usar 📋</h2>
     <ol>
