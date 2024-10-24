@@ -29,6 +29,7 @@
     </pre>
     <h2>Funcionalidades Futuras 🚀</h2>
     <ul>
+        <li>Link para mecher no Diagram de dados: https://lucid.app/lucidchart/c477aac0-282f-4c59-8401-5c78a7741b75/edit?invitationId=inv_eb1c140d-2be9-43c9-b97e-01003a1cb5e6</li>
         <li>Trocar a caixa por botões Clicavéis</li>
       <li>Integrar com um banco de dados (como MySQL) para armazenar e gerenciar os cadastros e reservas.</li>
       <li>Ajustes no CSS</li>
