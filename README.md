@@ -29,6 +29,7 @@
     </pre>
     <h2>Funcionalidades Futuras 🚀</h2>
     <ul>
+        <li>Trocar a caixa por botões Clicavéis</li>
       <li>Integrar com um banco de dados (como MySQL) para armazenar e gerenciar os cadastros e reservas.</li>
       <li>Ajustes no CSS</li>
     </ul>
