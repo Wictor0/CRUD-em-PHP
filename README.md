@@ -32,6 +32,8 @@
         <li>Trocar a caixa por botões Clicavéis</li>
       <li>Integrar com um banco de dados (como MySQL) para armazenar e gerenciar os cadastros e reservas.</li>
       <li>Ajustes no CSS</li>
+        <li>Organizar código</li>
+        <li>Pensar na praticidade do usuário, exibindo o necessário</li>
     </ul>
     <h2>Como Usar 📋</h2>
     <ol>
