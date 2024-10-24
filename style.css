@@ -10,7 +10,15 @@ body {
   height: 100vh;
   display: flex;
   justify-content: center;
+  align-items: flex-start; /* Permite o scroll para os outros containers */
+}
+
+/* Container geral que envolve tudo */
+.main-container {
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .container {
@@ -22,8 +30,8 @@ body {
   background-color: white;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
-  overflow: scroll; /* Para esconder o conteúdo que transborda */
   overflow: hidden;
+  margin: 20px auto; /* Centraliza e dá margem */
 }
 
 .image-section {
@@ -39,6 +47,24 @@ body {
   padding: 25px;
   overflow-y: auto; /* Scroll vertical */
   height: 100%; /* Garante que ocupe a altura total da caixa */
+}
+
+.select-button {
+  background-color: #008cba;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 18px;
+}
+
+.select-button:hover {
+  background-color: #1e3d7e;
 }
 
 h2 {
@@ -109,21 +135,35 @@ select {
   margin-bottom: 15px;
 }
 
+/* Seção de exibição de dados */
+.container-data {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+}
+
 /* READ */
 .data-display {
-  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 20px; /* Espaçamento entre os containers */
+  flex-wrap: wrap; /* Quebra de linha */
 }
 
 .category-container {
-  margin-bottom: 20px;
+  flex: 1 1 30%; /* 30% de largura em telas grandes */
+  flex-grow: 1;
   border: 1px solid #ddd;
   border-radius: 5px;
   padding: 15px;
-  transition: all 0.3s ease;
   background-color: white;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
-  overflow: hidden; /* Para esconder o conteúdo que transborda */
+  height: auto; /* Removido o valor fixo de altura */
+  max-width: 32%;
+  margin-bottom: 20px;
+  overflow: hidden;
 }
 
 .category-container h3 {
@@ -157,7 +197,7 @@ select {
 .category-container button:hover,
 .category-container a.delete-button:hover,
 .category-container a.edit-button:hover {
-  background-color: #005f5f;
+  background-color: #1e3d7e;
 }
 .category-container .edit-button {
   background-color: #1e3d7e; /* Azul Naval */

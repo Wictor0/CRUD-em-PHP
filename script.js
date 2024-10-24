@@ -20,3 +20,15 @@ function mostrarFormulario() {
     imageSection.style.backgroundImage = "url('img/pousada4.png')";
   }
 }
+
+function mostrarFormulario(formId) {
+  // Esconde todos os formulários
+  var forms = document.querySelectorAll("form");
+  forms.forEach(function (form) {
+    form.style.display = "none";
+  });
+
+  // Mostra o formulário selecionado
+  var form = document.getElementById(formId);
+  form.style.display = "block";
+}
