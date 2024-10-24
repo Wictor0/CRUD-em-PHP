@@ -83,6 +83,7 @@ input[type="submit"] {
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s ease;
+  max-width: fit-content;
 }
 
 input[type="submit"]:hover {
@@ -106,4 +107,61 @@ select {
 
 .form-group {
   margin-bottom: 15px;
+}
+
+/* READ */
+.data-display {
+  margin-top: 30px;
+}
+
+.category-container {
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  transition: all 0.3s ease;
+  background-color: white;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  overflow: hidden; /* Para esconder o conteúdo que transborda */
+}
+
+.category-container h3 {
+  margin-bottom: 10px;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.category-container ul {
+  list-style: none;
+  padding: 0;
+}
+.category-container ul li {
+  margin-bottom: 10px;
+}
+.category-container button,
+.category-container a.delete-button,
+.category-container a.edit-button {
+  background-color: #008cba;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 2px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.category-container button:hover,
+.category-container a.delete-button:hover,
+.category-container a.edit-button:hover {
+  background-color: #005f5f;
+}
+.category-container .edit-button {
+  background-color: #1e3d7e; /* Azul Naval */
+}
+.category-container .delete-button {
+  background-color: #f44336;
 }
