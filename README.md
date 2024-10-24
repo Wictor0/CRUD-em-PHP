@@ -17,13 +17,14 @@
     <h2>Estrutura do Projeto 🗂️</h2>
     <pre>
     /projeto-pousada/
-    ├── Pousada_Crud.php       <!-- Página principal -->
-    ├── style.css              <!-- Estilos CSS -->
-    ├── /img/                  <!-- Pasta de imagens -->
-    │   ├── pousada2.png        <!-- Imagem 2 da pousada -->
-    │   ├── pousada3.png        <!-- Imagem 3 da pousada -->
-    │   ├── pousada4.png        <!-- Imagem 4 da pousada -->
-    │   └── pousada5.png        <!-- Imagem 5 da pousada -->
+    ├── Pousada_Crud.php      
+    ├── style.css             
+    ├── script.js          
+    ├── /img/                
+    │   ├── pousada2.png     
+    │   ├── pousada3.png       
+    │   ├── pousada4.png    
+    │   └── pousada5.png      
     └──
     </pre>
     <h2>Funcionalidades Futuras 🚀</h2>
