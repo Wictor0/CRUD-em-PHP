@@ -50,7 +50,7 @@ body {
 }
 
 .select-button {
-  background-color: #008cba;
+  background-color: #acccd7;
   border: none;
   color: white;
   padding: 8px 12px;
@@ -64,7 +64,12 @@ body {
 }
 
 .select-button:hover {
-  background-color: #1e3d7e;
+  background-color: #008cba;
+}
+
+.select-button.active {
+  background-color: #008cba; /* Verde para o estado ativo */
+  color: white;
 }
 
 h2 {
@@ -151,7 +156,6 @@ select {
   gap: 20px; /* Espaçamento entre os containers */
   flex-wrap: wrap; /* Quebra de linha */
 }
-
 .category-container {
   flex: 1 1 30%; /* 30% de largura em telas grandes */
   flex-grow: 1;
@@ -160,30 +164,40 @@ select {
   padding: 15px;
   background-color: white;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  height: auto; /* Removido o valor fixo de altura */
   max-width: 32%;
   margin-bottom: 20px;
   overflow: hidden;
+  cursor: pointer;
 }
-
 .category-container h3 {
   margin-bottom: 10px;
   cursor: pointer;
   padding: 10px;
   border-radius: 5px;
 }
-
 .category-container ul {
   list-style: none;
   padding: 0;
+  display: none; /* Inicialmente oculto */
+}
+.category-container.expanded ul {
+  display: block; /* Exibe quando o contêiner está expandido */
 }
 .category-container ul li {
   margin-bottom: 10px;
 }
+.status-indicator {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
 .category-container button,
 .category-container a.delete-button,
-.category-container a.edit-button {
-  background-color: #008cba;
+.category-container a.edit-button,
+.category-container a.see-button {
+  background-color: #71a6b7;
   border: none;
   color: white;
   padding: 5px 10px;
@@ -196,12 +210,17 @@ select {
 }
 .category-container button:hover,
 .category-container a.delete-button:hover,
-.category-container a.edit-button:hover {
-  background-color: #1e3d7e;
+.category-container a.edit-button:hover,
+.category-container a.see-button:hover {
+  background-color: #008cba;
 }
-.category-container .edit-button {
-  background-color: #1e3d7e; /* Azul Naval */
-}
-.category-container .delete-button {
-  background-color: #f44336;
+
+.toggle-arrow {
+  cursor: pointer;
+  margin-left: 10px;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
