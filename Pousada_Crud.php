@@ -3,68 +3,64 @@ session_start();
 
 // Função para salvar hóspedes
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['nome'])) {
-    if (isset($_POST['edit_index']) && $_POST['edit_index'] !== '') {
-        $index = $_POST['edit_index'];
-        $_SESSION['hospedes'][$index] = [
-            "nome" => $_POST['nome'],
-            "cpf" => $_POST['cpf'],
-            "endereco" => $_POST['endereco'],
-            "telefone" => $_POST['telefone'],
-            "email" => $_POST['email'],
-            "data_nascimento" => $_POST['data_nascimento']
-        ];
+    $index = $_POST['edit_index'] ?? null;
+    $hospede = [
+        "nome" => $_POST['nome'],
+        "cpf" => $_POST['cpf'],
+        "endereco" => $_POST['endereco'],
+        "telefone" => $_POST['telefone'],
+        "email" => $_POST['email'],
+        "data_nascimento" => $_POST['data_nascimento']
+    ];
+
+    if ($index !== null && $index !== '') {
+        // Atualizar hóspede existente
+        $_SESSION['hospedes'][$index] = $hospede;
     } else {
-        $_SESSION['hospedes'][] = [
-            "nome" => $_POST['nome'],
-            "cpf" => $_POST['cpf'],
-            "endereco" => $_POST['endereco'],
-            "telefone" => $_POST['telefone'],
-            "email" => $_POST['email'],
-            "data_nascimento" => $_POST['data_nascimento']
-        ];
+        // Criar novo hóspede
+        $_SESSION['hospedes'][] = $hospede;
     }
 }
 
+
 // Função para salvar quartos
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['numero_quarto'])) {
-    if (isset($_POST['edit_index']) && $_POST['edit_index'] !== '') {
-        $index = $_POST['edit_index'];
-        $_SESSION['quartos'][$index] = [
-            "numero_quarto" => $_POST['numero_quarto'],
-            "tipo_quarto" => $_POST['tipo_quarto'],
-            "preco_diaria" => $_POST['preco_diaria'],
-            "status_quarto" => $_POST['status_quarto']
-        ];
+    $index = $_POST['edit_index'] ?? null;
+    $quartos = [
+        "numero_quarto" => $_POST['numero_quarto'],
+        "tipo_quarto" => $_POST['tipo_quarto'],
+        "preco_diaria" => $_POST['preco_diaria'],
+        "status_quarto" => $_POST['status_quarto']
+    ];
+
+    if ($index !== null && $index !== '') {
+        // Atualizar quarto existente
+        $_SESSION['quartos'][$index] = $quartos;
     } else {
-        $_SESSION['quartos'][] = [
-            "numero_quarto" => $_POST['numero_quarto'],
-            "tipo_quarto" => $_POST['tipo_quarto'],
-            "preco_diaria" => $_POST['preco_diaria'],
-            "status_quarto" => $_POST['status_quarto']
-        ];
+        // Criar novo quarto
+        $_SESSION['quartos'][] = $quartos;
     }
 }
 
 // Função para salvar reservas
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['hospede'])) {
-    if (isset($_POST['edit_index']) && $_POST['edit_index'] !== '') {
-        $index = $_POST['edit_index'];
-        $_SESSION['reservas'][$index] = [
-            "hospede" => $_POST['hospede'],
-            "quarto" => $_POST['quarto'],
-            "checkin" => $_POST['checkin'],
-            "checkout" => $_POST['checkout'],
-            "status_reserva" => $_POST['status_reserva']
-        ];
+    $index = $_POST['edit_index'] ?? null;
+    $reservas = [
+        "hospede" => $_POST['hospede'],
+        "quarto" => $_POST['quarto'],
+        "checkin" => $_POST['checkin'],
+        "checkout" => $_POST['checkout'],
+        "status_reserva" => $_POST['status_reserva']
+    ];
+
+    if ($index !== null && $index !== '') {
+        // Atualizar reserva existente
+        $_SESSION['reservas'][$index] = $reservas;
     } else {
-        $_SESSION['reservas'][] = [
-            "hospede" => $_POST['hospede'],
-            "quarto" => $_POST['quarto'],
-            "checkin" => $_POST['checkin'],
-            "checkout" => $_POST['checkout'],
-            "status_reserva" => $_POST['status_reserva']
-        ];
+        // Criar novo reserva
+        $_SESSION['reservas'][] = $reservas;
     }
+
 }
 
 // Função para excluir registros
@@ -104,8 +100,8 @@ if (isset($_GET['editar_reserva'])) {
     $editReserva = $_SESSION['reservas'][$index];
     $editReserva['index'] = $index;
 }
-?>
 
+?>
 
 <!DOCTYPE HTML>
 <html lang="pt-BR">
@@ -114,6 +110,12 @@ if (isset($_GET['editar_reserva'])) {
     <title>Cadastro e Reserva de Pousada</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
+    <script>
+        // Variáveis globais com dados das sessões
+        window.hospedes = <?php echo json_encode($_SESSION['hospedes'] ?? []); ?>;
+        window.quartos = <?php echo json_encode($_SESSION['quartos'] ?? []); ?>;
+        window.reservas = <?php echo json_encode($_SESSION['reservas'] ?? []); ?>;
+    </script>
 </head>
 <body>
 <div class="main-container">
@@ -135,6 +137,7 @@ if (isset($_GET['editar_reserva'])) {
             <!-- Formulário de Cadastro de Hóspedes -->
             <form id="formHospedes" style="display:none;" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
                 <h2>Cadastro de Hóspedes</h2>
+                <input type="hidden" name="edit_index" id="edit_index">
                 <div class="form-group">
                     <label for="nome">Nome:</label>
                     <input type="text" name="nome" placeholder="Nome Completo">
@@ -159,12 +162,13 @@ if (isset($_GET['editar_reserva'])) {
                     <label for="data_nascimento">Data de Nascimento:</label>
                     <input type="date" name="data_nascimento">
                 </div>
-                <input type="submit" value="Cadastrar Hóspede">
+                <input type="submit" value="Cadastrar Hóspede" id="submitHospede">
             </form>
 
             <!-- Formulário de Cadastro de Quartos -->
             <form id="formQuartos" style="display:none;" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
                 <h2>Cadastro de Quartos</h2>
+                <input type="hidden" name="edit_index" id="edit_index">
                 <div class="form-group">
                     <label for="numero_quarto">Número do Quarto:</label>
                     <input type="text" name="numero_quarto" placeholder="Número do Quarto">
@@ -184,12 +188,13 @@ if (isset($_GET['editar_reserva'])) {
                         <option value="ocupado">Ocupado</option>
                     </select>
                 </div>
-                <input type="submit" value="Cadastrar Quarto">
+                <input type="submit" value="Cadastrar Quarto" id="submitQuarto">
             </form>
 
             <!-- Formulário de Reserva de Quartos -->
             <form id="formReserva" style="display:none;" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
                 <h2>Reserva de Quartos</h2>
+                <input type="hidden" name="edit_index" id="edit_index">
                 <div class="form-group">
                     <label for="hospede">Hóspede:</label>
                     <input type="text" name="hospede" placeholder="Nome do Hóspede">
@@ -214,7 +219,7 @@ if (isset($_GET['editar_reserva'])) {
                         <option value="cancelada">Cancelada</option>
                     </select>
                 </div>
-                <input type="submit" value="Reservar">
+                <input type="submit" value="Reservar" id="submitReserva">
             </form>
         </div>
     </div>
@@ -222,7 +227,7 @@ if (isset($_GET['editar_reserva'])) {
 
         <!-- Fim da Seção de Formulário / Início exibição -->
 
-        <div class="container-data">
+    <div class="container-data">
         <div class="data-display">
 
             <!-- Hóspedes Cadastrados -->
@@ -235,12 +240,12 @@ if (isset($_GET['editar_reserva'])) {
                     <?php if (!empty($_SESSION['hospedes'])): ?>
                         <?php foreach ($_SESSION['hospedes'] as $index => $hospede): ?>
                             <li>
-                                <?php echo "Nome: " . htmlspecialchars($hospede['nome']) . "<br>CPF: " . htmlspecialchars($hospede['cpf']); ?>
-                                <br>
-                                <a class="see-button" href="?ver_quarto=<?php echo $index; ?>">Ver</a>
-                                <a class="edit-button" href="?editar_hospede=<?php echo $index; ?>">Editar</a>
+                                <strong>Nome:</strong> <?php echo htmlspecialchars($hospede['nome']); ?><br>
+                                <strong>CPF:</strong> <?php echo htmlspecialchars($hospede['cpf']); ?><br>
+                                <strong>Telefone:</strong> <?php echo htmlspecialchars($hospede['telefone']); ?><br>
+                                <a class="see-button" onclick="verHospede(<?php echo $index; ?>)">Ver</a>
+                                <a class="edit-button" onclick="editarHospede(<?php echo $index; ?>)">Editar</a>
                                 <a class="delete-button" href="?excluir_hospede=<?php echo $index; ?>">Excluir</a>
-                                <br>
                             </li>
                         <?php endforeach; ?>
                     <?php else: ?>
@@ -259,13 +264,13 @@ if (isset($_GET['editar_reserva'])) {
                     <?php if (!empty($_SESSION['quartos'])): ?>
                         <?php foreach ($_SESSION['quartos'] as $index => $quarto): ?>
                             <li>
-                                <?php echo "Quarto: " . htmlspecialchars($quarto['numero_quarto']) . "<br>Tipo: " . htmlspecialchars($quarto['tipo_quarto']); ?>
+                                <strong>Quarto:</strong> <?php echo htmlspecialchars($quarto['numero_quarto']); ?><br>
+                                <strong>Tipo:</strong> <?php echo htmlspecialchars($quarto['tipo_quarto']); ?><br>
+                                <strong>Status:</strong> <span class="status-indicator" style="background-color: <?php echo $quarto['status_quarto'] == 'disponivel' ? '#32CD32' : '#FF4500'; ?>"></span>
                                 <br>
-                                <a class="see-button" href="?ver_quarto=<?php echo $index; ?>">Ver</a>
-                                <a class="edit-button" href="?editar_quarto=<?php echo $index; ?>">Editar</a>
+                                <a class="see-button" onclick="verQuarto(<?php echo $index; ?>)">Ver</a>
+                                <a class="edit-button" onclick="editarQuarto(<?php echo $index; ?>)">Editar</a>
                                 <a class="delete-button" href="?excluir_quarto=<?php echo $index; ?>">Excluir</a>
-                                <span class="status-indicator" style="background-color: <?php echo $quarto['status_quarto'] == 'disponivel' ? '#32CD32' : '#FF4500'; ?>"></span>
-                                <br>
                             </li>
                         <?php endforeach; ?>
                     <?php else: ?>
@@ -284,12 +289,12 @@ if (isset($_GET['editar_reserva'])) {
                     <?php if (!empty($_SESSION['reservas'])): ?>
                         <?php foreach ($_SESSION['reservas'] as $index => $reserva): ?>
                             <li>
-                                <?php echo "Hóspede: " . htmlspecialchars($reserva['hospede']) . "<br>Quarto: " . htmlspecialchars($reserva['quarto']); ?>
-                                <br>
-                                <a class="see-button" href="?ver_quarto=<?php echo $index; ?>">Ver</a>
-                                <a class="edit-button" href="?editar_reserva=<?php echo $index; ?>">Editar</a>
+                                <strong>Hóspede:</strong> <?php echo htmlspecialchars($reserva['hospede']); ?><br>
+                                <strong>Quarto:</strong> <?php echo htmlspecialchars($reserva['quarto']); ?><br>
+                                <strong>Data de Checkout:</strong> <?php echo htmlspecialchars($reserva['checkout']); ?><br>
+                                <a class="see-button" onclick="verReserva(<?php echo $index; ?>)">Ver</a>
+                                <a class="edit-button" onclick="editarReserva(<?php echo $index; ?>)">Editar</a>
                                 <a class="delete-button" href="?excluir_reserva=<?php echo $index; ?>">Excluir</a>
-                                <br>
                             </li>
                         <?php endforeach; ?>
                     <?php else: ?>
@@ -300,9 +305,7 @@ if (isset($_GET['editar_reserva'])) {
 
         </div>
     </div>
-
-
-    </div>
 </div>
+
 </body>
 </html>

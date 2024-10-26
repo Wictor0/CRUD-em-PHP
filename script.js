@@ -65,3 +65,143 @@ document.addEventListener("DOMContentLoaded", function () {
   const containers = document.querySelectorAll(".category-container .content");
   containers.forEach((container) => (container.style.display = "none"));
 });
+
+// Função para abrir/fechar individualmente cada container
+function toggleContent(containerHeader) {
+  const container = containerHeader.closest(".category-container");
+  container.classList.toggle("open");
+  const content = container.querySelector(".content");
+  content.style.display = container.classList.contains("open")
+    ? "block"
+    : "none";
+}
+
+// Função para desabilitar todos os campos do formulário para visualização
+function desabilitarFormulario(formId, desabilitar = true) {
+  const form = document.getElementById(formId);
+  Array.from(form.elements).forEach((element) => {
+    element.disabled = desabilitar;
+  });
+  document.getElementById("submitHospede").style.display = desabilitar
+    ? "none"
+    : "block";
+  document.getElementById("submitQuarto").style.display = desabilitar
+    ? "none"
+    : "block";
+  document.getElementById("submitReserva").style.display = desabilitar
+    ? "none"
+    : "block";
+}
+
+// Função para visualizar dados de hóspedes
+function verHospede(index) {
+  const hospede = window.hospedes[index];
+  if (hospede) {
+    mostrarFormulario("formHospedes");
+    document.querySelector('#formHospedes [name="nome"]').value = hospede.nome;
+    document.querySelector('#formHospedes [name="cpf"]').value = hospede.cpf;
+    document.querySelector('#formHospedes [name="endereco"]').value =
+      hospede.endereco;
+    document.querySelector('#formHospedes [name="telefone"]').value =
+      hospede.telefone;
+    document.querySelector('#formHospedes [name="email"]').value =
+      hospede.email;
+    document.querySelector('#formHospedes [name="data_nascimento"]').value =
+      hospede.data_nascimento;
+    desabilitarFormulario("formHospedes", true); // Desabilitar para visualização
+  }
+}
+
+// Função para editar dados de hóspedes
+function editarHospede(index) {
+  const hospede = window.hospedes[index];
+  if (hospede) {
+    mostrarFormulario("formHospedes");
+    document.querySelector('#formHospedes [name="nome"]').value = hospede.nome;
+    document.querySelector('#formHospedes [name="cpf"]').value = hospede.cpf;
+    document.querySelector('#formHospedes [name="endereco"]').value =
+      hospede.endereco;
+    document.querySelector('#formHospedes [name="telefone"]').value =
+      hospede.telefone;
+    document.querySelector('#formHospedes [name="email"]').value =
+      hospede.email;
+    document.querySelector('#formHospedes [name="data_nascimento"]').value =
+      hospede.data_nascimento;
+    document.querySelector('#formHospedes [name="edit_index"]').value = index;
+    desabilitarFormulario("formHospedes", false); // Habilitar para edição
+  }
+}
+
+// Função para visualizar dados de quartos
+function verQuarto(index) {
+  const quarto = window.quartos[index];
+  if (quarto) {
+    mostrarFormulario("formQuartos");
+    document.querySelector('#formQuartos [name="numero_quarto"]').value =
+      quarto.numero_quarto;
+    document.querySelector('#formQuartos [name="tipo_quarto"]').value =
+      quarto.tipo_quarto;
+    document.querySelector('#formQuartos [name="preco_diaria"]').value =
+      quarto.preco_diaria;
+    document.querySelector('#formQuartos [name="status_quarto"]').value =
+      quarto.status_quarto;
+    desabilitarFormulario("formQuartos", true); // Desabilitar para visualização
+  }
+}
+
+// Função para editar dados de quartos
+function editarQuarto(index) {
+  const quarto = window.quartos[index];
+  if (quarto) {
+    mostrarFormulario("formQuartos");
+    document.querySelector('#formQuartos [name="numero_quarto"]').value =
+      quarto.numero_quarto;
+    document.querySelector('#formQuartos [name="tipo_quarto"]').value =
+      quarto.tipo_quarto;
+    document.querySelector('#formQuartos [name="preco_diaria"]').value =
+      quarto.preco_diaria;
+    document.querySelector('#formQuartos [name="status_quarto"]').value =
+      quarto.status_quarto;
+    document.querySelector('#formQuartos [name="edit_index"]').value = index;
+    desabilitarFormulario("formQuartos", false); // Habilitar para edição
+  }
+}
+
+// Função para visualizar dados de reservas
+function verReserva(index) {
+  const reserva = window.reservas[index];
+  if (reserva) {
+    mostrarFormulario("formReserva");
+    document.querySelector('#formReserva [name="hospede"]').value =
+      reserva.hospede;
+    document.querySelector('#formReserva [name="quarto"]').value =
+      reserva.quarto;
+    document.querySelector('#formReserva [name="checkin"]').value =
+      reserva.checkin;
+    document.querySelector('#formReserva [name="checkout"]').value =
+      reserva.checkout;
+    document.querySelector('#formReserva [name="status_reserva"]').value =
+      reserva.status_reserva;
+    desabilitarFormulario("formReserva", true); // Desabilitar para visualização
+  }
+}
+
+// Função para editar dados de reservas
+function editarReserva(index) {
+  const reserva = window.reservas[index];
+  if (reserva) {
+    mostrarFormulario("formReserva");
+    document.querySelector('#formReserva [name="hospede"]').value =
+      reserva.hospede;
+    document.querySelector('#formReserva [name="quarto"]').value =
+      reserva.quarto;
+    document.querySelector('#formReserva [name="checkin"]').value =
+      reserva.checkin;
+    document.querySelector('#formReserva [name="checkout"]').value =
+      reserva.checkout;
+    document.querySelector('#formReserva [name="status_reserva"]').value =
+      reserva.status_reserva;
+    document.querySelector('#formReserva [name="edit_index"]').value = index;
+    desabilitarFormulario("formReserva", false); // Habilitar para edição
+  }
+}
