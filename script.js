@@ -1,36 +1,33 @@
-function mostrarFormulario() {
-  var escolha = document.getElementById("tipoCadastro").value;
-
-  // Esconde todos os formulários primeiro
-  document.getElementById("formHospedes").style.display = "none";
-  document.getElementById("formQuartos").style.display = "none";
-  document.getElementById("formReserva").style.display = "none";
-
-  // Altera a imagem de acordo com a escolha
-  var imageSection = document.querySelector(".image-section");
-
-  if (escolha === "hospedes") {
-    document.getElementById("formHospedes").style.display = "block";
-    imageSection.style.backgroundImage = "url('img/pousada2.png')";
-  } else if (escolha === "quartos") {
-    document.getElementById("formQuartos").style.display = "block";
-    imageSection.style.backgroundImage = "url('img/pousada3.png')";
-  } else if (escolha === "reserva") {
-    document.getElementById("formReserva").style.display = "block";
-    imageSection.style.backgroundImage = "url('img/pousada4.png')";
-  }
-}
-
+/// Função para mostrar o formulário selecionado
 function mostrarFormulario(formId) {
   // Esconde todos os formulários
-  var forms = document.querySelectorAll("form");
-  forms.forEach(function (form) {
-    form.style.display = "none";
-  });
+  const forms = document.querySelectorAll("form");
+  forms.forEach((form) => (form.style.display = "none"));
 
-  // Mostra o formulário selecionado
-  var form = document.getElementById(formId);
-  form.style.display = "block";
+  // Remove a classe 'active' de todos os botões
+  const buttons = document.querySelectorAll(".select-button");
+  buttons.forEach((button) => button.classList.remove("active"));
+
+  // Exibe o formulário selecionado e adiciona a classe 'active' ao botão clicado
+  const form = document.getElementById(formId);
+  if (form) {
+    form.style.display = "block";
+    event.target.classList.add("active");
+  }
+
+  // Atualiza a imagem de acordo com o formulário exibido
+  const imageSection = document.querySelector(".image-section");
+  switch (formId) {
+    case "formHospedes":
+      imageSection.style.backgroundImage = "url('img/pousada2.png')";
+      break;
+    case "formQuartos":
+      imageSection.style.backgroundImage = "url('img/pousada3.png')";
+      break;
+    case "formReserva":
+      imageSection.style.backgroundImage = "url('img/pousada4.png')";
+      break;
+  }
 }
 
 // Função para aplicar máscara ao CPF
@@ -50,25 +47,7 @@ function formatPhone(input) {
     .replace(/(\d{1})(\d{4})(\d{4})$/, "$1 $2-$3");
 }
 
-function mostrarFormulario(formId) {
-  // Esconde todos os formulários
-  const forms = document.querySelectorAll("form");
-  forms.forEach((form) => (form.style.display = "none"));
-
-  // Remove a classe 'active' de todos os botões
-  const buttons = document.querySelectorAll(".select-button");
-  buttons.forEach((button) => button.classList.remove("active"));
-
-  // Exibe o formulário selecionado
-  const form = document.getElementById(formId);
-  if (form) {
-    form.style.display = "block";
-  }
-
-  // Adiciona a classe 'active' ao botão clicado
-  event.target.classList.add("active");
-}
-
+// Função para alternar a exibição das setas nas categorias
 function toggleContent(container) {
   const content = container.querySelector(".content");
   const arrow = container.querySelector(".toggle-arrow");
@@ -81,6 +60,7 @@ function toggleContent(container) {
   }
 }
 
+// Oculta os conteúdos inicialmente
 document.addEventListener("DOMContentLoaded", function () {
   const containers = document.querySelectorAll(".category-container .content");
   containers.forEach((container) => (container.style.display = "none"));

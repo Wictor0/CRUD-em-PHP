@@ -168,7 +168,13 @@ select {
   margin-bottom: 20px;
   overflow: hidden;
   cursor: pointer;
+  transition: transform 0.2s ease;
 }
+
+.category-container:hover {
+  transform: scale(1.02);
+}
+
 .category-container h3 {
   margin-bottom: 10px;
   cursor: pointer;

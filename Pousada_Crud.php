@@ -253,7 +253,7 @@ if (isset($_GET['editar_reserva'])) {
             <div class="category-container" onclick="toggleContent(this)">
                 <h2>
                     Quartos Cadastrados
-                    <span class="toggle-arrow" style="background-image: url('img/seta-baixo.png');"></span>
+                    <span class="toggle-arrow" style="background-image: url('img/seta-baixo.svg');"></span>
                 </h2>
                 <ul class="content">
                     <?php if (!empty($_SESSION['quartos'])): ?>
@@ -278,7 +278,7 @@ if (isset($_GET['editar_reserva'])) {
             <div class="category-container" onclick="toggleContent(this)">
                 <h2>
                     Reservas Cadastradas
-                    <span class="toggle-arrow" style="background-image: url('img/seta-baixo.png');"></span>
+                    <span class="toggle-arrow" style="background-image: url('img/seta-baixo.svg');"></span>
                 </h2>
                 <ul class="content">
                     <?php if (!empty($_SESSION['reservas'])): ?>
