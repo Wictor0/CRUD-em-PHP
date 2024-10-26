@@ -66,20 +66,6 @@ document.addEventListener("DOMContentLoaded", function () {
   containers.forEach((container) => (container.style.display = "none"));
 });
 
-// Função para abrir/fechar individualmente cada container
-function toggleContent(containerHeader) {
-  const container = containerHeader.closest(".category-container");
-  container.classList.toggle("open");
-  const content = container.querySelector(".content");
-  content.style.display = container.classList.contains("open")
-    ? "block"
-    : "none";
-  const arrow = container.querySelector(".toggle-arrow");
-  arrow.style.backgroundImage = container.classList.contains("open")
-    ? "url('img/seta-cima.svg')"
-    : "url('img/seta-baixo.svg')";
-}
-
 // Função para desabilitar todos os campos do formulário para visualização
 function desabilitarFormulario(formId, desabilitar = true) {
   const form = document.getElementById(formId);

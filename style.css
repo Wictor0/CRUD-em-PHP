@@ -143,31 +143,29 @@ select {
 /* Seção de exibição de dados */
 .container-data {
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
   justify-content: space-between;
   width: 100%;
   max-width: 1200px;
 }
 
-/* READ */
-.container-data {
-  display: flex; /* Utiliza flexbox para alinhar os elementos lado a lado */
-  justify-content: space-between;
-  flex-wrap: wrap; /* Permite que os elementos se empilhem em linhas conforme necessário */
-  gap: 20px; /* Adiciona um espaço entre os contêineres */
-}
-
 .category-container {
-  flex: 0 0 28%; /* 30% de largura em telas grandes */
+  display: block;
+  max-width: 1200px;
+  flex: 0 0 30%; /* 30% de largura em telas grandes */
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 15px;
   background-color: white;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  max-width: 32%;
-  margin-bottom: 20px;
-  overflow: hidden;
+  margin: 20px auto;
   cursor: pointer;
   transition: transform 0.2s ease;
+  max-height: 400px;
+  overflow: auto;
+  overflow-x: hidden;
 }
 
 .category-container:hover {
