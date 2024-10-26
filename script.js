@@ -74,6 +74,10 @@ function toggleContent(containerHeader) {
   content.style.display = container.classList.contains("open")
     ? "block"
     : "none";
+  const arrow = container.querySelector(".toggle-arrow");
+  arrow.style.backgroundImage = container.classList.contains("open")
+    ? "url('img/seta-cima.svg')"
+    : "url('img/seta-baixo.svg')";
 }
 
 // Função para desabilitar todos os campos do formulário para visualização

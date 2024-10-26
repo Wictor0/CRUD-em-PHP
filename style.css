@@ -149,18 +149,17 @@ select {
 }
 
 /* READ */
-.data-display {
-  display: flex;
+.container-data {
+  display: flex; /* Utiliza flexbox para alinhar os elementos lado a lado */
   justify-content: space-between;
-  width: 100%;
-  gap: 20px; /* Espaçamento entre os containers */
-  flex-wrap: wrap; /* Quebra de linha */
+  flex-wrap: wrap; /* Permite que os elementos se empilhem em linhas conforme necessário */
+  gap: 20px; /* Adiciona um espaço entre os contêineres */
 }
+
 .category-container {
-  flex: 1 1 30%; /* 30% de largura em telas grandes */
-  flex-grow: 1;
+  flex: 0 0 28%; /* 30% de largura em telas grandes */
   border: 1px solid #ddd;
-  border-radius: 5px;
+  border-radius: 8px;
   padding: 15px;
   background-color: white;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
@@ -224,7 +223,7 @@ select {
 
 .toggle-arrow {
   cursor: pointer;
-  margin-left: 10px;
+  text-align: right;
   display: inline-block;
   width: 20px;
   height: 20px;
