@@ -34,7 +34,6 @@
       <li>Ajustes no CSS</li>
         <li>Organizar código</li>
         <li>Pensar na praticidade do usuário, exibindo o necessário</li>
-       <li> ajeitar os botões colocando os de reservas em prioridade e o dos quartos em segundo, por último colocar o botão de hóspedes por último  </li>
      <li> ajeitar o visual (Wictor por favor grave vídeos de como tá) </li>
     </ul>
     <h2>Como Usar 📋</h2>
