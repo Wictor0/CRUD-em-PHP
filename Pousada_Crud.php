@@ -203,15 +203,16 @@ if (isset($_GET['editar_reserva'])) {
 
         <!-- Seção de Formulário -->
         <div class="form-section">
-            <h2>Cadastro e Reserva</h2>
-
-            <!-- Botões de seleção -->
-            <div class="button-container">
-                <button class="select-button" onclick="mostrarFormulario('formReserva')">Reserva de Quartos</button>
-                <button class="select-button" onclick="mostrarFormulario('formQuartos')">Cadastro de Quartos</button>
-                <button class="select-button" onclick="mostrarFormulario('formHospedes')">Cadastro de Hóspedes</button>
-            </div>
-
+            <div class="fixed-header">
+                <h2>Cadastro e Reserva</h2>
+                <!-- Botões de seleção -->
+                <div class="button-container">
+                    <button class="select-button" onclick="mostrarFormulario('formReserva')">Reserva de Quartos</button>
+                    <button class="select-button" onclick="mostrarFormulario('formQuartos')">Cadastro de Quartos</button>
+                    <button class="select-button" onclick="mostrarFormulario('formHospedes')">Cadastro de Hóspedes</button>
+                </div>
+                <hr class="separator">
+            </div>          
             <!-- Formulário de Cadastro de Hóspedes -->
             <form id="formHospedes" style="display:none;" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
                 <h2>Cadastro de Hóspedes</h2>
