@@ -19,7 +19,9 @@
     /projeto-pousada/
     ├── Pousada_Crud.php      
     ├── style.css             
-    ├── script.js          
+    ├── script.js  
+    ├── README.md
+    ├── db.sql 
     ├── /img/                
     │   ├── pousada2.png     
     │   ├── pousada3.png       
