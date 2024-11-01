@@ -118,6 +118,84 @@ if (isset($_GET['editar_reserva'])) {
     </script>
 </head>
 <body>
+<div class="main-exibicao">
+<div class="container-data">
+            <!-- Quartos Cadastrados -->
+            <div class="category-container-quartos">
+                <h2>
+                    Quartos Cadastrados
+                </h2>
+                <ul class="content">
+                    <?php if (!empty($_SESSION['quartos'])): ?>
+                        <?php foreach ($_SESSION['quartos'] as $index => $quarto): ?>
+                            <li>
+                                <strong>Quarto:</strong> <?php echo htmlspecialchars($quarto['numero_quarto']); ?><br>
+                                <strong>Tipo:</strong> <?php echo htmlspecialchars($quarto['tipo_quarto']); ?><br>
+                                <strong>Status:</strong> <span class="status-indicator" style="background-color: <?php echo $quarto['status_quarto'] == 'disponivel' ? '#32CD32' : '#FF4500'; ?>"></span>
+                                <br>
+                                <a class="see-button" onclick="verQuarto(<?php echo $index; ?>)">Ver</a>
+                                <a class="edit-button" onclick="editarQuarto(<?php echo $index; ?>)">Editar</a>
+                                <a class="delete-button" href="?excluir_quarto=<?php echo $index; ?>">Excluir</a>
+                            </li>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <p>Nenhum quarto cadastrado.</p>
+                    <?php endif; ?>
+                </ul>
+            </div>
+        </div>
+<div class="small-containers">
+        <!-- Início exibição -->
+        <div class="container-data">
+            <!-- Reservas Cadastradas -->
+            <div class="category-container">
+                <h2>
+                    Reservas Cadastradas
+                </h2>
+                <ul class="content">
+                    <?php if (!empty($_SESSION['reservas'])): ?>
+                        <?php foreach ($_SESSION['reservas'] as $index => $reserva): ?>
+                            <li>
+                                <strong>Hóspede:</strong> <?php echo htmlspecialchars($reserva['hospede']); ?><br>
+                                <strong>Quarto:</strong> <?php echo htmlspecialchars($reserva['quarto']); ?><br>
+                                <strong>Data de Checkout:</strong> <?php echo htmlspecialchars($reserva['checkout']); ?><br>
+                                <a class="see-button" onclick="verReserva(<?php echo $index; ?>)">Ver</a>
+                                <a class="edit-button" onclick="editarReserva(<?php echo $index; ?>)">Editar</a>
+                                <a class="delete-button" href="?excluir_reserva=<?php echo $index; ?>">Excluir</a>
+                            </li>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <p>Nenhuma reserva cadastrada.</p>
+                    <?php endif; ?>
+                </ul>
+            </div>
+            </div>            
+            <div class="container-data">     
+            <!-- Hóspedes Cadastrados -->
+            <div class="category-container">
+                <h2>
+                    Hóspedes Cadastrados
+                </h2>
+                <ul class="content">
+                    <?php if (!empty($_SESSION['hospedes'])): ?>
+                        <?php foreach ($_SESSION['hospedes'] as $index => $hospede): ?>
+                            <li>
+                                <strong>Nome:</strong> <?php echo htmlspecialchars($hospede['nome']); ?><br>
+                                <strong>CPF:</strong> <?php echo htmlspecialchars($hospede['cpf']); ?><br>
+                                <strong>Telefone:</strong> <?php echo htmlspecialchars($hospede['telefone']); ?><br>
+                                <a class="see-button" onclick="verHospede(<?php echo $index; ?>)">Ver</a>
+                                <a class="edit-button" onclick="editarHospede(<?php echo $index; ?>)">Editar</a>
+                                <a class="delete-button" href="?excluir_hospede=<?php echo $index; ?>">Excluir</a>
+                            </li>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <p>Nenhum hóspede cadastrado.</p>
+                    <?php endif; ?>
+                </ul>
+            </div>
+        </div>
+</div>        
+</div>            
 <div class="main-container">
     <div class="container">
         <!-- Seção de Imagem -->
@@ -129,9 +207,9 @@ if (isset($_GET['editar_reserva'])) {
 
             <!-- Botões de seleção -->
             <div class="button-container">
-                <button class="select-button" onclick="mostrarFormulario('formHospedes')">Cadastro de Hóspedes</button>
-                <button class="select-button" onclick="mostrarFormulario('formQuartos')">Cadastro de Quartos</button>
                 <button class="select-button" onclick="mostrarFormulario('formReserva')">Reserva de Quartos</button>
+                <button class="select-button" onclick="mostrarFormulario('formQuartos')">Cadastro de Quartos</button>
+                <button class="select-button" onclick="mostrarFormulario('formHospedes')">Cadastro de Hóspedes</button>
             </div>
 
             <!-- Formulário de Cadastro de Hóspedes -->
@@ -223,89 +301,6 @@ if (isset($_GET['editar_reserva'])) {
             </form>
         </div>
     </div>
-
-
-        <!-- Fim da Seção de Formulário / Início exibição -->
-
-    <div class="container-data">
-        <!-- Hóspedes Cadastrados -->
-        <div class="category-container" onclick="toggleContent(this)">
-            <h2>
-                Hóspedes Cadastrados
-                <span class="toggle-arrow" style="background-image: url('img/seta-baixo.svg');"></span>
-            </h2>
-            <ul class="content">
-                <?php if (!empty($_SESSION['hospedes'])): ?>
-                    <?php foreach ($_SESSION['hospedes'] as $index => $hospede): ?>
-                        <li>
-                            <strong>Nome:</strong> <?php echo htmlspecialchars($hospede['nome']); ?><br>
-                            <strong>CPF:</strong> <?php echo htmlspecialchars($hospede['cpf']); ?><br>
-                            <strong>Telefone:</strong> <?php echo htmlspecialchars($hospede['telefone']); ?><br>
-                            <a class="see-button" onclick="verHospede(<?php echo $index; ?>)">Ver</a>
-                            <a class="edit-button" onclick="editarHospede(<?php echo $index; ?>)">Editar</a>
-                            <a class="delete-button" href="?excluir_hospede=<?php echo $index; ?>">Excluir</a>
-                        </li>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <p>Nenhum hóspede cadastrado.</p>
-                <?php endif; ?>
-            </ul>
-        </div>
-    </div>
-
-    <div class="container-data">
-        <!-- Quartos Cadastrados -->
-        <div class="category-container" onclick="toggleContent(this)">
-            <h2>
-                Quartos Cadastrados
-                <span class="toggle-arrow" style="background-image: url('img/seta-baixo.svg');"></span>
-            </h2>
-            <ul class="content">
-                <?php if (!empty($_SESSION['quartos'])): ?>
-                    <?php foreach ($_SESSION['quartos'] as $index => $quarto): ?>
-                        <li>
-                            <strong>Quarto:</strong> <?php echo htmlspecialchars($quarto['numero_quarto']); ?><br>
-                            <strong>Tipo:</strong> <?php echo htmlspecialchars($quarto['tipo_quarto']); ?><br>
-                            <strong>Status:</strong> <span class="status-indicator" style="background-color: <?php echo $quarto['status_quarto'] == 'disponivel' ? '#32CD32' : '#FF4500'; ?>"></span>
-                            <br>
-                            <a class="see-button" onclick="verQuarto(<?php echo $index; ?>)">Ver</a>
-                            <a class="edit-button" onclick="editarQuarto(<?php echo $index; ?>)">Editar</a>
-                            <a class="delete-button" href="?excluir_quarto=<?php echo $index; ?>">Excluir</a>
-                        </li>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <p>Nenhum quarto cadastrado.</p>
-                <?php endif; ?>
-            </ul>
-        </div>
-    </div>
-
-    <div class="container-data">
-        <!-- Reservas Cadastradas -->
-        <div class="category-container" onclick="toggleContent(this)">
-            <h2>
-                Reservas Cadastradas
-                <span class="toggle-arrow" style="background-image: url('img/seta-baixo.svg');"></span>
-            </h2>
-            <ul class="content">
-                <?php if (!empty($_SESSION['reservas'])): ?>
-                    <?php foreach ($_SESSION['reservas'] as $index => $reserva): ?>
-                        <li>
-                            <strong>Hóspede:</strong> <?php echo htmlspecialchars($reserva['hospede']); ?><br>
-                            <strong>Quarto:</strong> <?php echo htmlspecialchars($reserva['quarto']); ?><br>
-                            <strong>Data de Checkout:</strong> <?php echo htmlspecialchars($reserva['checkout']); ?><br>
-                            <a class="see-button" onclick="verReserva(<?php echo $index; ?>)">Ver</a>
-                            <a class="edit-button" onclick="editarReserva(<?php echo $index; ?>)">Editar</a>
-                            <a class="delete-button" href="?excluir_reserva=<?php echo $index; ?>">Excluir</a>
-                        </li>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <p>Nenhuma reserva cadastrada.</p>
-                <?php endif; ?>
-            </ul>
-        </div>
-    </div>
-
 
 </div>
 </div>

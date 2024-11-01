@@ -9,21 +9,26 @@ body {
   background-color: #f4f4f4;
   height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: flex-start; /* Permite o scroll para os outros containers */
+  justify-content: flex-start; /* Alinha o conteúdo para começar do topo */
+  align-items: center;
+  flex-direction: column; /* Alinha o conteúdo em coluna para rolagem */
 }
 
 /* Container geral que envolve tudo */
 .main-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   width: 100%;
+  flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-top: 20px; /* Margem para separação */
 }
 
 .container {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   width: 80%;
   max-width: 1200px;
   height: 600px; /* Altura fixa para a caixa */
@@ -141,53 +146,64 @@ select {
 }
 
 /* Seção de exibição de dados */
-.container-data {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: space-between;
+.main-exibicao {
+  display: flex; /* Adicione esta linha */
+  gap: 20px; /* Espaçamento entre os containers */
   width: 100%;
   max-width: 1200px;
+  margin-top: 20px;
 }
 
-.category-container {
-  display: block;
+.container-data {
+  display: flex;
+  gap: 20px;
+  width: 100%;
   max-width: 1200px;
-  flex: 0 0 30%; /* 30% de largura em telas grandes */
+  margin-top: 20px;
+}
+
+.category-container,
+.category-container-quartos {
+  width: 100%;
+  height: 100%;
+  max-height: 500px;
   border: 1px solid #ddd;
   border-radius: 8px;
-  padding: 15px;
   background-color: white;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  margin: 20px auto;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-  max-height: 400px;
-  overflow: auto;
-  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Esconde conteúdo fora dos limites do container */
+}
+.category-container {
+  height: 230px;
+}
+.small-containers {
+  display: flex;
+  flex-direction: column; /* Organiza os itens em coluna */
+  gap: 20px;
+  flex: 1;
+  min-width: 500px;
 }
 
-.category-container:hover {
+.category-container h2,
+.category-container-quartos h2 {
+  font-size: 1.5em;
+  padding: 15px 20px; /* Ajuste do padding para cobrir a área */
+  margin: 0;
+  background-color: white;
+  border-bottom: 1px solid #ddd;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  width: 100%; /* Garante que o background cobre toda a largura */
+  box-sizing: border-box; /* Inclui padding na largura total */
+  height: 60px; /* Aumenta a altura para cobrir a área superior */
+}
+
+.category-container:hover,
+.category-container-quartos:hover {
   transform: scale(1.02);
-}
-
-.category-container h3 {
-  margin-bottom: 10px;
-  cursor: pointer;
-  padding: 10px;
-  border-radius: 5px;
-}
-.category-container ul {
-  list-style: none;
-  padding: 0;
-  display: none; /* Inicialmente oculto */
-}
-.category-container.expanded ul {
-  display: block; /* Exibe quando o contêiner está expandido */
-}
-.category-container ul li {
-  margin-bottom: 10px;
 }
 
 .status-indicator {
@@ -200,7 +216,11 @@ select {
 .category-container button,
 .category-container a.delete-button,
 .category-container a.edit-button,
-.category-container a.see-button {
+.category-container a.see-button,
+.category-container-quartos button,
+.category-container-quartos a.delete-button,
+.category-container-quartos a.edit-button,
+.category-container-quartos a.see-button {
   background-color: #71a6b7;
   border: none;
   color: white;
@@ -215,16 +235,44 @@ select {
 .category-container button:hover,
 .category-container a.delete-button:hover,
 .category-container a.edit-button:hover,
-.category-container a.see-button:hover {
+.category-container a.see-button:hover,
+.category-container-quartos button:hover,
+.category-container-quartos a.delete-button:hover,
+.category-container-quartos a.edit-button:hover,
+.category-container-quartos a.see-button:hover {
   background-color: #008cba;
 }
 
-.toggle-arrow {
-  cursor: pointer;
-  text-align: right;
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  background-size: contain;
-  background-repeat: no-repeat;
+.content {
+  overflow-y: auto; /* Ativar scroll somente para o conteúdo */
+  padding: 20px;
+  flex-grow: 1; /* Preencher o espaço restante */
+}
+
+.content li {
+  margin-bottom: 10px; /* Espaçamento entre os itens */
+  padding-bottom: 10px; /* Espaçamento interno para a borda */
+  border-bottom: 1px solid #ddd; /* Linha divisória */
+}
+
+.content li:last-child {
+  border-bottom: none; /* Remove a linha do último item */
+}
+
+/* Personalização da barra de rolagem (scrollbar) */
+.content::-webkit-scrollbar {
+  width: 8px; /* Largura da barra de rolagem */
+}
+
+.content::-webkit-scrollbar-thumb {
+  background-color: #ccc; /* Cor do "thumb" da barra */
+  border-radius: 4px; /* Bordas arredondadas */
+}
+
+.content::-webkit-scrollbar-thumb:hover {
+  background-color: #aaa; /* Cor do "thumb" ao passar o mouse */
+}
+
+.content::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Cor de fundo da barra */
 }

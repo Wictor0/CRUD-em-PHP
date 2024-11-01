@@ -47,25 +47,6 @@ function formatPhone(input) {
     .replace(/(\d{1})(\d{4})(\d{4})$/, "$1 $2-$3");
 }
 
-// Função para alternar a exibição das setas nas categorias
-function toggleContent(container) {
-  const content = container.querySelector(".content");
-  const arrow = container.querySelector(".toggle-arrow");
-  if (content.style.display === "none" || content.style.display === "") {
-    content.style.display = "block";
-    arrow.style.backgroundImage = "url('img/seta-cima.svg')"; // seta para cima
-  } else {
-    content.style.display = "none";
-    arrow.style.backgroundImage = "url('img/seta-baixo.svg')"; // seta para baixo
-  }
-}
-
-// Oculta os conteúdos inicialmente
-document.addEventListener("DOMContentLoaded", function () {
-  const containers = document.querySelectorAll(".category-container .content");
-  containers.forEach((container) => (container.style.display = "none"));
-});
-
 // Função para desabilitar todos os campos do formulário para visualização
 function desabilitarFormulario(formId, desabilitar = true) {
   const form = document.getElementById(formId);

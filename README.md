@@ -19,9 +19,7 @@
     /projeto-pousada/
     ├── Pousada_Crud.php      
     ├── style.css             
-    ├── script.js  
-    ├── README.md
-    ├── db.sql 
+    ├── script.js          
     ├── /img/                
     │   ├── pousada2.png     
     │   ├── pousada3.png       
@@ -36,7 +34,6 @@
       <li>Ajustes no CSS</li>
         <li>Organizar código</li>
         <li>Pensar na praticidade do usuário, exibindo o necessário</li>
-     <li> ajeitar o visual (Wictor por favor grave vídeos de como tá) </li>
     </ul>
     <h2>Como Usar 📋</h2>
     <ol>
