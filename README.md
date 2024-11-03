@@ -31,9 +31,8 @@
     <ul>
         <li>Link para mexer no Diagram de dados:(https://lucid.app/lucidchart/0819c1ed-9269-4aa5-a5ed-661058f292a9/edit?viewport_loc=-1590%2C197%2C3411%2C1541%2C0_0&invitationId=inv_137215d6-53ed-4613-8ea4-fd0dd0890d24)</li>
       <li>Integrar com um banco de dados (como MySQL) para armazenar e gerenciar os cadastros e reservas.</li>
-      <li>Ajustes no CSS</li>
-        <li>Organizar código</li>
-        <li>Pensar na praticidade do usuário, exibindo o necessário</li>
+    <li>Organizar código(Pedro Juan)</li>
+        <li>Preparar Apresentação (Jõao Braz)</li>
     </ul>
     <h2>Como Usar 📋</h2>
     <ol>
