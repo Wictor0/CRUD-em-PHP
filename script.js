@@ -1,3 +1,41 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Função para visualizar dados de quartos
+function verQuarto(index) {
+  const quarto = window.quartos[index];
+  if (quarto) {
+    mostrarFormulario("formQuartos");
+    document.querySelector('#formQuartos [name="numero_quarto"]').value =
+      quarto.numero_quarto;
+    document.querySelector('#formQuartos [name="tipo_quarto"]').value =
+      quarto.tipo_quarto;
+    document.querySelector('#formQuartos [name="preco_diaria"]').value =
+      quarto.preco_diaria;
+    document.querySelector('#formQuartos [name="status_quarto"]').value =
+      quarto.status_quarto;
+    desabilitarFormulario("formQuartos", true); // Desabilitar para visualização
+  }
+}
+
+// Função para editar dados de quartos
+function editarQuarto(index) {
+  const quarto = window.quartos[index];
+  if (quarto) {
+    mostrarFormulario("formQuartos");
+    document.querySelector('#formQuartos [name="numero_quarto"]').value =
+      quarto.numero_quarto;
+    document.querySelector('#formQuartos [name="tipo_quarto"]').value =
+      quarto.tipo_quarto;
+    document.querySelector('#formQuartos [name="preco_diaria"]').value =
+      quarto.preco_diaria;
+    document.querySelector('#formQuartos [name="status_quarto"]').value =
+      quarto.status_quarto;
+    document.querySelector('#formQuartos [name="edit_index"]').value = index;
+    desabilitarFormulario("formQuartos", false); // Habilitar para edição
+  }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 /// Função para mostrar o formulário selecionado
 function mostrarFormulario(formId) {
   // Esconde todos os formulários
@@ -30,23 +68,6 @@ function mostrarFormulario(formId) {
   }
 }
 
-// Função para aplicar máscara ao CPF
-function formatCPF(input) {
-  input.value = input.value
-    .replace(/\D/g, "")
-    .replace(/(\d{3})(\d)/, "$1.$2")
-    .replace(/(\d{3})(\d)/, "$1.$2")
-    .replace(/(\d{3})(\d{1,2})$/, "$1-$2");
-}
-
-// Função para aplicar máscara ao Telefone
-function formatPhone(input) {
-  input.value = input.value
-    .replace(/\D/g, "")
-    .replace(/(\d{2})(\d)/, "($1) $2")
-    .replace(/(\d{1})(\d{4})(\d{4})$/, "$1 $2-$3");
-}
-
 // Função para desabilitar todos os campos do formulário para visualização
 function desabilitarFormulario(formId, desabilitar = true) {
   const form = document.getElementById(formId);
@@ -62,6 +83,25 @@ function desabilitarFormulario(formId, desabilitar = true) {
   document.getElementById("submitReserva").style.display = desabilitar
     ? "none"
     : "block";
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Função para aplicar máscara ao CPF
+function formatCPF(input) {
+  input.value = input.value
+    .replace(/\D/g, "")
+    .replace(/(\d{3})(\d)/, "$1.$2")
+    .replace(/(\d{3})(\d)/, "$1.$2")
+    .replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+}
+
+// Função para aplicar máscara ao Telefone
+function formatPhone(input) {
+  input.value = input.value
+    .replace(/\D/g, "")
+    .replace(/(\d{2})(\d)/, "($1) $2")
+    .replace(/(\d{1})(\d{4})(\d{4})$/, "$1 $2-$3");
 }
 
 // Função para visualizar dados de hóspedes
@@ -100,41 +140,6 @@ function editarHospede(index) {
       hospede.data_nascimento;
     document.querySelector('#formHospedes [name="edit_index"]').value = index;
     desabilitarFormulario("formHospedes", false); // Habilitar para edição
-  }
-}
-
-// Função para visualizar dados de quartos
-function verQuarto(index) {
-  const quarto = window.quartos[index];
-  if (quarto) {
-    mostrarFormulario("formQuartos");
-    document.querySelector('#formQuartos [name="numero_quarto"]').value =
-      quarto.numero_quarto;
-    document.querySelector('#formQuartos [name="tipo_quarto"]').value =
-      quarto.tipo_quarto;
-    document.querySelector('#formQuartos [name="preco_diaria"]').value =
-      quarto.preco_diaria;
-    document.querySelector('#formQuartos [name="status_quarto"]').value =
-      quarto.status_quarto;
-    desabilitarFormulario("formQuartos", true); // Desabilitar para visualização
-  }
-}
-
-// Função para editar dados de quartos
-function editarQuarto(index) {
-  const quarto = window.quartos[index];
-  if (quarto) {
-    mostrarFormulario("formQuartos");
-    document.querySelector('#formQuartos [name="numero_quarto"]').value =
-      quarto.numero_quarto;
-    document.querySelector('#formQuartos [name="tipo_quarto"]').value =
-      quarto.tipo_quarto;
-    document.querySelector('#formQuartos [name="preco_diaria"]').value =
-      quarto.preco_diaria;
-    document.querySelector('#formQuartos [name="status_quarto"]').value =
-      quarto.status_quarto;
-    document.querySelector('#formQuartos [name="edit_index"]').value = index;
-    desabilitarFormulario("formQuartos", false); // Habilitar para edição
   }
 }
 

@@ -1,28 +1,6 @@
 <?php
 session_start();
 
-// Função para salvar hóspedes
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['nome'])) {
-    $index = $_POST['edit_index'] ?? null;
-    $hospede = [
-        "nome" => $_POST['nome'],
-        "cpf" => $_POST['cpf'],
-        "endereco" => $_POST['endereco'],
-        "telefone" => $_POST['telefone'],
-        "email" => $_POST['email'],
-        "data_nascimento" => $_POST['data_nascimento']
-    ];
-
-    if ($index !== null && $index !== '') {
-        // Atualizar hóspede existente
-        $_SESSION['hospedes'][$index] = $hospede;
-    } else {
-        // Criar novo hóspede
-        $_SESSION['hospedes'][] = $hospede;
-    }
-}
-
-
 // Função para salvar quartos
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['numero_quarto'])) {
     $index = $_POST['edit_index'] ?? null;
@@ -41,6 +19,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['numero_quarto'])) {
         $_SESSION['quartos'][] = $quartos;
     }
 }
+
+// Variáveis para edição de quartos
+$editQuarto = null;
+
+if (isset($_GET['editar_quarto'])) {
+    $index = $_GET['editar_quarto'];
+    $editQuarto = $_SESSION['quartos'][$index];
+    $editQuarto['index'] = $index;
+}
+
+// Função para excluir quartos
+if (isset($_GET['excluir_quarto'])) {
+    $index = $_GET['excluir_quarto'];
+    unset($_SESSION['quartos'][$index]);
+    $_SESSION['quartos'] = array_values($_SESSION['quartos']);
+}
+
+##############################################################################################################
 
 // Função para salvar reservas
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['hospede'])) {
@@ -63,16 +59,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['hospede'])) {
 
 }
 
+// Função para salvar hóspedes
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['nome'])) {
+    $index = $_POST['edit_index'] ?? null;
+    $hospede = [
+        "nome" => $_POST['nome'],
+        "cpf" => $_POST['cpf'],
+        "endereco" => $_POST['endereco'],
+        "telefone" => $_POST['telefone'],
+        "email" => $_POST['email'],
+        "data_nascimento" => $_POST['data_nascimento']
+    ];
+
+    if ($index !== null && $index !== '') {
+        // Atualizar hóspede existente
+        $_SESSION['hospedes'][$index] = $hospede;
+    } else {
+        // Criar novo hóspede
+        $_SESSION['hospedes'][] = $hospede;
+    }
+}
+
 // Função para excluir registros
 if (isset($_GET['excluir_hospede'])) {
     $index = $_GET['excluir_hospede'];
     unset($_SESSION['hospedes'][$index]);
     $_SESSION['hospedes'] = array_values($_SESSION['hospedes']);
-}
-if (isset($_GET['excluir_quarto'])) {
-    $index = $_GET['excluir_quarto'];
-    unset($_SESSION['quartos'][$index]);
-    $_SESSION['quartos'] = array_values($_SESSION['quartos']);
 }
 if (isset($_GET['excluir_reserva'])) {
     $index = $_GET['excluir_reserva'];
@@ -82,18 +94,12 @@ if (isset($_GET['excluir_reserva'])) {
 
 // Variáveis para edição
 $editHospede = null;
-$editQuarto = null;
 $editReserva = null;
 
 if (isset($_GET['editar_hospede'])) {
     $index = $_GET['editar_hospede'];
     $editHospede = $_SESSION['hospedes'][$index];
     $editHospede['index'] = $index;
-}
-if (isset($_GET['editar_quarto'])) {
-    $index = $_GET['editar_quarto'];
-    $editQuarto = $_SESSION['quartos'][$index];
-    $editQuarto['index'] = $index;
 }
 if (isset($_GET['editar_reserva'])) {
     $index = $_GET['editar_reserva'];
@@ -120,6 +126,7 @@ if (isset($_GET['editar_reserva'])) {
 <body>
 <div class="main-exibicao">
 <div class="container-data">
+<!-- ##################################################################################################################################### -->
             <!-- Quartos Cadastrados -->
             <div class="category-container-quartos">
                 <h2>
@@ -144,6 +151,7 @@ if (isset($_GET['editar_reserva'])) {
                 </ul>
             </div>
         </div>
+<!-- ##################################################################################################################################### -->
 <div class="small-containers">
         <!-- Início exibição -->
         <div class="container-data">
@@ -213,6 +221,37 @@ if (isset($_GET['editar_reserva'])) {
                 </div>
                 <hr class="separator">
             </div>          
+
+<!-- ##################################################################################################################################### -->
+
+            <!-- Formulário de Cadastro de Quartos -->
+            <form id="formQuartos" style="display:none;" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+                <h2>Cadastro de Quartos</h2>
+                <input type="hidden" name="edit_index" id="edit_index">
+                <div class="form-group">
+                    <label for="numero_quarto">Número do Quarto:</label>
+                    <input type="text" name="numero_quarto" placeholder="Número do Quarto">
+                </div>
+                <div class="form-group">
+                    <label for="tipo_quarto">Tipo de Quarto:</label>
+                    <input type="text" name="tipo_quarto" placeholder="Simples, Duplo, Luxo, etc.">
+                </div>
+                <div class="form-group">
+                    <label for="preco_diaria">Preço da Diária:</label>
+                    <input type="text" name="preco_diaria" placeholder="R$ 0,00">
+                </div>
+                <div class="form-group">
+                    <label for="status_quarto">Status:</label>
+                    <select name="status_quarto">
+                        <option value="disponivel">Disponível</option>
+                        <option value="ocupado">Ocupado</option>
+                    </select>
+                </div>
+                <input type="submit" value="Cadastrar Quarto" id="submitQuarto">
+            </form>
+
+<!-- ##################################################################################################################################### -->
+
             <!-- Formulário de Cadastro de Hóspedes -->
             <form id="formHospedes" style="display:none;" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
                 <h2>Cadastro de Hóspedes</h2>
@@ -242,32 +281,6 @@ if (isset($_GET['editar_reserva'])) {
                     <input type="date" name="data_nascimento">
                 </div>
                 <input type="submit" value="Cadastrar Hóspede" id="submitHospede">
-            </form>
-
-            <!-- Formulário de Cadastro de Quartos -->
-            <form id="formQuartos" style="display:none;" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
-                <h2>Cadastro de Quartos</h2>
-                <input type="hidden" name="edit_index" id="edit_index">
-                <div class="form-group">
-                    <label for="numero_quarto">Número do Quarto:</label>
-                    <input type="text" name="numero_quarto" placeholder="Número do Quarto">
-                </div>
-                <div class="form-group">
-                    <label for="tipo_quarto">Tipo de Quarto:</label>
-                    <input type="text" name="tipo_quarto" placeholder="Simples, Duplo, Luxo, etc.">
-                </div>
-                <div class="form-group">
-                    <label for="preco_diaria">Preço da Diária:</label>
-                    <input type="text" name="preco_diaria" placeholder="R$ 0,00">
-                </div>
-                <div class="form-group">
-                    <label for="status_quarto">Status:</label>
-                    <select name="status_quarto">
-                        <option value="disponivel">Disponível</option>
-                        <option value="ocupado">Ocupado</option>
-                    </select>
-                </div>
-                <input type="submit" value="Cadastrar Quarto" id="submitQuarto">
             </form>
 
             <!-- Formulário de Reserva de Quartos -->
